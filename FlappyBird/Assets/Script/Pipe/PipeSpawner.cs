@@ -14,18 +14,25 @@ public class PipeSpawner : MonoBehaviour
     [SerializeField] private float spawnRate;
     [SerializeField] private float _elapsedTime;
 
+    private bool startSpawn;
+    
     private void Start()
     {
-        //В начале игры:
-        //Устанавливается рандомное значение через сколько появится скала
-        spawnRate = Random.Range(3, 7);
+        // //В начале игры:
+        // //Устанавливается рандомное значение через сколько появится скала
+        // spawnRate = Random.Range(3, 7);
+        //
+        // //Спавнится скала
+        // _SpawnPipe();
         
-        //Спавнится скала
-        _SpawnPipe();
+        
+        startSpawn = false;
     }
 
     private void Update()
     {
+        if (!startSpawn) return;
+        
         //Каждый кадр ведется отсчет продолжительности игры
         _elapsedTime += Time.deltaTime;
         
@@ -42,13 +49,13 @@ public class PipeSpawner : MonoBehaviour
         //Когда таймер стал больше, чем spawnRate,
         //спавнится скала и таймер сбрасывается
         //А затем, опять рандомизируется через сколько произойдет след спавн
-        if (timer >= spawnRate && _elapsedTime <= 120) _EnableSpawnPipe(3, 7);
+        if (timer >= spawnRate && _elapsedTime <= 120) EnableSpawnPipe(3, 7);
 
         //если таймер больше или равен спавну
         //и при этом продолжительность игры больше 120 сек
         //Вызывается метод спавна и рандомизации чисел
         
-        if (timer >= spawnRate && _elapsedTime >= 120) _EnableSpawnPipe(2,3);
+        if (timer >= spawnRate && _elapsedTime >= 120) EnableSpawnPipe(2,3);
     }
 
     private void _SpawnPipe()
@@ -59,7 +66,7 @@ public class PipeSpawner : MonoBehaviour
         Instantiate(pipe, new Vector3(transform.position.x,Random.Range(lowestPoint, highesPoint), 0), transform.rotation);
     }
 
-     private void _EnableSpawnPipe(int firstNumber, int secondNumber)
+     public void EnableSpawnPipe(int firstNumber, int secondNumber)
      {
          _SpawnPipe();
          timer = 0;

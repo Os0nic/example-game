@@ -14,10 +14,6 @@ public class Player : MonoBehaviour
     private void Start()
     {
         
-        
-        // var logicObject = GameObject.FindWithTag("Logic");
-        // //если такой тег есть, то вернуть
-        // if (logicObject != null) logic = logicObject.GetComponent<LogicScript>();
     }
     
     private void Update()
@@ -30,18 +26,18 @@ public class Player : MonoBehaviour
         MassCheckControl();
     }
 
-    //метод устанавливает гравитацию на 0, если не кликнул на экран
-    private void MassCheckControl()
-    {
-        if (_birdIsActive == false)
-        {
-            myRigidbody2D.simulated = false;
-        }
-        if (_birdIsActive)
-        {
-            myRigidbody2D.simulated = true;
-        }
-    }
+     // метод устанавливает гравитацию на 0, если не кликнул на экран
+     private void MassCheckControl()
+     {
+         if (_birdIsActive == false)
+         {
+             myRigidbody2D.simulated = false;
+         }
+         if (_birdIsActive)
+         {
+             myRigidbody2D.simulated = true;
+         }
+     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
